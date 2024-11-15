@@ -4,8 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -17,8 +17,9 @@ import java.time.LocalDateTime;
 public class AdminAccessLoggingAspect {
 
     private final HttpServletRequest request;
-
-    @After("execution(* org.example.expert.domain.user.controller.UserController.getUser(..))")
+    // 코드 개선 퀴즈 - AOP의 이해
+    // @After > @Before 변경
+    @Before("execution(* org.example.expert.domain.user.controller.UserController.getUser(..))")
     public void logAfterChangeUserRole(JoinPoint joinPoint) {
         String userId = String.valueOf(request.getAttribute("userId"));
         String requestUrl = request.getRequestURI();
