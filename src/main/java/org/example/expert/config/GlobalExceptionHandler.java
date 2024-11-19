@@ -40,6 +40,12 @@ public class GlobalExceptionHandler {
         return getErrorResponse(status, "입력된 날짜의 형식이 잘못되었습니다. 2000-01-01 형식으로 입력해주세요.");
     }
 
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ResponseEntity<Map<String, Object>> handleAccessDeniedException() {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        return getErrorResponse(status, "접근 권한이 없습니다.");
+    }
+
     public ResponseEntity<Map<String, Object>> getErrorResponse(HttpStatus status, String message) {
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse.put("status", status.name());
