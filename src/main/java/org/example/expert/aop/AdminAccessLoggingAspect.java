@@ -19,8 +19,8 @@ public class AdminAccessLoggingAspect {
     private final HttpServletRequest request;
     // 코드 개선 퀴즈 - AOP의 이해
     // @After > @Before 변경
-    @Before("execution(* org.example.expert.domain.user.controller.UserController.getUser(..))")
-    public void logAfterChangeUserRole(JoinPoint joinPoint) {
+    @Before("execution(* org.example.expert.domain.user.controller.UserAdminController.changeUserRole(..))")
+    public void logBeforeChangeUserRole(JoinPoint joinPoint) {
         String userId = String.valueOf(request.getAttribute("userId"));
         String requestUrl = request.getRequestURI();
         LocalDateTime requestTime = LocalDateTime.now();
